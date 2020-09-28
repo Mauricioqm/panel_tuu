@@ -1,0 +1,74 @@
+<div class="wrapper">
+
+  <app-header></app-header>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1 style="display: inline;">AREAS LABORALES</h1>
+      <div class="box-body" style="display: inline; float: right;">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+          Nueva
+        </button>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="callout callout-info">
+        <ul *ngFor="let item of areas">
+          <li class="areas">
+            {{item.nombre}}
+            <span (click)="eliminar(item.id)" style="color: red; cursor: pointer;"><i class="fas fa-trash-alt"></i></span> &nbsp;
+            <span (click)="editar(item.id)" data-toggle="modal" data-target="#exampleModal" style="color: #1b7bff; cursor: pointer;"><i class="fas fa-edit"></i></span>
+          </li>
+        </ul>
+        <!-- Modal Editar-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Nueva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="container">
+                    <input type="text" placeholder="Ingrese el nuevo nombe" [(ngModel)]="nombre" class="form-control">  
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="getNombre()" data-dismiss="modal">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <input type="text" [(ngModel)]="nombreArea" placeholder="Nombre de area" style="width: 100%;">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" (click)="crear()" data-dismiss="modal">Guardar</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <app-footer></app-footer>
+  <div class="control-sidebar-bg"></div>
+</div>

@@ -1,0 +1,127 @@
+<div class="wrapper">
+  <app-header></app-header>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Membreias</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/home">Home</a></li>
+              <li class="breadcrumb-item active">Membresias</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Membresias</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+
+        <div class="container" >
+  
+          <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Cargar nueva
+        </button>
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="row">#</th>
+                  <th class="th-sm">Nombre</th>
+                  <th class="th-sm">Descripción</th>
+                  <th class="th-sm">Precio</th>
+                  <th class="th-sm">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let plan of planes; let i = index; let key of keys">
+                <tr>
+                  <th scope="row">{{i}}</th>
+                  <td>{{plan.payload.node_.children_.root_.value.value_}}</td>
+                  <td>{{plan.payload.node_.children_.root_.left.value.value_}}</td>
+                  <td>${{plan.payload.node_.children_.root_.right.value.value_}}.000</td>
+                  <td><button type="button" class="btn btn-danger" (click)="eliminar(plan.key)">Eliminar</button></td>
+                </tr>
+              </tbody>
+          </table>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Nueva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="container">
+                   <input type="text" placeholder="nombre" [(ngModel)]="nombre" class="form-control">
+                   <input type="number" placeholder="precio" [(ngModel)]="precio" class="form-control">  
+                   <input type="text" placeholder="descripcion" [(ngModel)]="descripcion" class="form-control">   
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="agregar()" data-dismiss="modal">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+        
+        <!-- Modal Editar-->
+        <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="container">
+                   <input type="text" placeholder="nombre" [(ngModel)]="nombre" class="form-control">
+                   <input type="number" placeholder="precio" [(ngModel)]="precio" class="form-control">  
+                   <input type="text" placeholder="descripcion" [(ngModel)]="descripcion" class="form-control">   
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+<!-- ./wrapper -->
+
+<app-footer></app-footer>

@@ -1,0 +1,295 @@
+<div class="wrapper" *ngIf="usuario">
+
+  <app-header></app-header>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header" style="text-align: center;">
+      <h1>Perfil</h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row">
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile" style="text-align: center;">
+              <img class="profile-user-img img-responsive img-circle" src="{{usuario.avatar || '../../../assets/profile.jpg'}}" alt="{{usuario.nombre}}">
+
+              <h3 class="profile-username text-center">{{usuario.nombre}}</h3>
+
+              <p class="text-muted text-center">{{usuario.profesion}}</p>
+              <hr>
+              <strong><i class="fa fa-book margin-r-5"></i> Email</strong>
+              <p class="text-muted">{{usuario.email}}</p>
+              <hr>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Ubicacion</strong>
+              <p class="text-muted">{{usuario.ciudad}}, {{usuario.departamento}}, {{usuario.pais}}</p>
+              <hr>
+              <div class="box-body" style="display: inline;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                  Enviar notificacion
+                </button>
+              </div>
+              <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <input type="text" [(ngModel)]="titulo" placeholder="Titulo" style="width: 100%;">
+                      <br><br>
+                      <textarea [(ngModel)]="texto" rows="4" cols="50" placeholder="Mensaje" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-success" (click)="enviarNotificacion()" data-dismiss="modal">Enviar</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+            </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div class="nav-tabs-custom">
+            <h3 class="box-title">Sobre {{usuario.nombre}}</h3>
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+                <strong><i class="fa fa-pencil margin-r-5"></i> Area laboral</strong>
+                <p>{{usuario.aLaboral}}</p>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Profesion</strong>
+                <p>{{usuario.profesion}}</p>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Certificados</strong>
+                <p>{{usuario.certificados}}</p>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Habilidades</strong>
+                <p>{{usuario.habilidades}}</p>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Oferta</strong>
+                <p>{{usuario.miOferta}}</p>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Membresia</strong>
+                <p>{{usuario.membresia}}</p>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Estado</strong>
+                <p>{{usuario.estado}}</p>
+
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            
+          </div>
+
+        </div>
+        
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile" style="text-align: center;">
+              <h3 class="box-title">Contrataciones</h3>
+              <table class="table table-striped p-responsive">
+                <thead>
+                  <tr>
+                    <th>Socio</th>
+                    <th>Fecha</th>
+                    <th>Costo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of contrataciones">
+                    <td>{{item.socio}}</td>
+                    <td>{{item.timestamp | date: 'yyyy/MM/dd'}}</td>
+                    <td>{{item.costo}}</td>
+                  </tr>
+                </tbody>
+              </table>      
+              <hr>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+
+        <div class="botones">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default">Editar membresia</button> &nbsp;
+          <button type="button" class="btn btn-success" (click)="habilitar()">Habilitar usuario</button> &nbsp;
+          <button type="button" class="btn btn-warning" (click)="inhabilitar()">Inhabilitar usuario</button> &nbsp;
+          <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar usuario</button> &nbsp;
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <label>Seleccione 1:</label>
+            <select [(ngModel)]="licencia">
+              <option value="basica">Básica</option>
+              <option value="Licencia premium por 3 meses">Licencia premium por 3 meses</option>
+              <option value="Licencia premium por 6 meses">Licencia premium por 6 meses</option>
+              <option value="Licencia premium por 12 meses">Licencia premium por 12 meses</option>
+            </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success" (click)="membresia()" data-dismiss="modal">Guardar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<app-footer></app-footer>

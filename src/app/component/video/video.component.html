@@ -1,0 +1,128 @@
+<div class="wrapper">
+  <app-header></app-header>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Video</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Video</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+      <!-- Main content -->
+      <section class="content">
+  
+        <!-- Default box -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Video Home</h3>
+            <div style="text-align: center;" class="container">
+                <div text-center *ngIf="!isUploading && !isUploaded">
+                    <h1>Subir video</h1>
+                    <div class="fileUpload btn btn-primary">
+                    <span>Cargar</span>
+                    <input
+                        id="uploadBtn"
+                        type="file"
+                        class="upload"
+                        (change)="uploadFile($event.target.files)"/>
+                    </div>
+                </div>
+            
+                <div text-center *ngIf="isUploading && !isUploaded">
+                    <h2>Archivo seleccionado:<b>{{ fileName }}</b></h2>
+            
+                    <div *ngIf="percentage | async as pct">
+                    Progress: {{ pct | number }}%
+                    <!-- <progress-bar value="{{ pct / 100 }}"></progress-bar> -->
+                    </div>
+            
+                    <div *ngIf="snapshot | async as snap">
+                    <!-- File Size: {{ snap.totalBytes | fileSizePipe }} Transfered:
+                    {{ snap.bytesTransferred | fileSizePipe }} -->
+                        <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes">
+                            <button
+                            color="warning"
+                            size="small"
+                            (click)="task.pause()"
+                            class="button is-warning"
+                            >Pause</button
+                            >
+                            <button
+                            size="small"
+                            (click)="task.resume()"
+                            class="button is-info"
+                            >Resume</button
+                            >
+                            <button
+                            color="danger"
+                            size="small"
+                            (click)="task.cancel()"
+                            class="button is-danger"
+                            >Cancel</button
+                            >
+                        </div>
+                    </div>
+            
+                </div>
+            
+                <div text-center *ngIf="!isUploading && isUploaded">
+            
+                    <!-- <h2> <b>{{ fileName }}</b> Cargado!</h2> -->
+            
+                    <div *ngIf="UploadedFileURL | async as url">
+                    <!-- <img [src]="url" /> -->
+                    <!-- <a [href]="url" target="_blank" rel="noopener">Download</a> -->
+                    </div>
+                    <!-- File Size: {{ fileSize | fileSizePipe }} -->
+                    <!-- <button
+                        expand="full"
+                        color="success"
+                        (click)="isUploading = isUploaded = false"
+                        >Upload More</button> -->
+                </div>
+                
+                <!-- <h2 text-center>Uploaded Freaky Images</h2> -->
+                
+                <div color="light" text-center *ngFor="let item of videos">
+                    <!-- <h2>{{ item.name }}</h2>     -->
+                    <!-- <img [src]="item.filepath" /> -->
+                    <video width="320" height="240" controls>
+                <source [src]="item.filepath" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
+                <button class="btn btn-danger" (click)="eliminar(item.id)">Borrar</button>
+                    <!-- <a [href]="item.filepath" target="_blank" rel="noopener">Download</a> -->
+                </div>
+            </div>
+          
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+  
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+  
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <app-footer></app-footer>

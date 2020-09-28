@@ -1,0 +1,39 @@
+<div class="login-box">
+    <div class="login-logo">
+      <img src="../../../assets/Tuu_Negro.png" alt="tuu">
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Login</p>
+  
+        <!-- <form> -->
+          <div class="input-group mb-3">
+            <input [(ngModel)]="email" class="form-control marbo15" type="email" placeholder="Ingrese Email" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input [(ngModel)]="password" class="form-control marbo15" type="password" placeholder="Ingrese Contrasenna" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <!-- /.col -->
+            <div class="col">
+              <button class="btn btn-primary btn-block" (click)="login()">Entrar</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        <!-- </form> -->
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
